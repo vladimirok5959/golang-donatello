@@ -34,13 +34,25 @@ func main() {
 	fmt.Printf("respMe: %#v\n", respMe)
 	fmt.Printf("err: %#v\n\n", err)
 
+	time.Sleep(1000 * time.Millisecond)
+
 	fmt.Printf("client.Donates:\n")
 	respDonates, err := client.Donates(ctx, 0, 20)
 	fmt.Printf("respDonates: %#v\n", respDonates)
 	fmt.Printf("err: %#v\n\n", err)
 
+	time.Sleep(1000 * time.Millisecond)
+
 	fmt.Printf("client.Clients:\n")
 	respClients, err := client.Clients(ctx)
 	fmt.Printf("respClients: %#v\n", respClients)
-	fmt.Printf("err: %#v\n", err)
+	fmt.Printf("err: %#v\n\n", err)
+
+	time.Sleep(1000 * time.Millisecond)
+
+	fmt.Printf("client.EachDonate:\n")
+	_ = client.EachDonate(ctx, func(donate *v1.ResponseDonatesContent) error {
+		fmt.Printf("EachDonate: %#v\n", donate)
+		return nil
+	})
 }
