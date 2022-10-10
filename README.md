@@ -5,6 +5,8 @@ Go API client for ukrainian donate platform donatello.to
 
 ## Demo and testing
 
+Example is here: [https://github.com/vladimirok5959/golang-donatello/blob/main/main.go](https://github.com/vladimirok5959/golang-donatello/blob/main/main.go)
+
 ```sh
 export TOKEN="YOUR-TOKEN"
 go run main.go
@@ -63,6 +65,18 @@ respClients: &v1.ResponseClients{
     }
 }
 err: <nil>
+
+client.EachDonate:
+EachDonate: &v1.ResponseDonatesContent{
+    PubID: "A1B-A123456",
+    ClientName: "ClientName",
+    Message: "Message",
+    Amount: "100",
+    Currency: "UAH",
+    Goal: "",
+    IsPublished: false,
+    CreatedAt: "2022-10-20 00:30:50"
+}
 ```
 
 API faker included, see: [https://github.com/vladimirok5959/golang-donatello/blob/main/donatello/v1/client_fake_api.go](https://github.com/vladimirok5959/golang-donatello/blob/main/donatello/v1/client_fake_api.go)

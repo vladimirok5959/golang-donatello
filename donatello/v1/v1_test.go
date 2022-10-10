@@ -155,6 +155,50 @@ var _ = Describe("Client", func() {
 				}))
 			})
 		})
+
+		Context("EachDonate", func() {
+			It("iterate over all donates", func() {
+				api.MockDonates = func(page, size int64) (int64, []byte, error) {
+					return http.StatusOK, []byte(`{
+						"content": [
+							{
+								"pubId": "A1B-A123451",
+								"clientName": "ClientName 1",
+								"message": "Message 1",
+								"amount": "101",
+								"currency": "UAH",
+								"isPublished": false,
+								"createdAt": "2022-10-20 00:30:50"
+							},
+							{
+								"pubId": "A1B-A123452",
+								"clientName": "ClientName 2",
+								"message": "Message 2",
+								"amount": "102",
+								"currency": "UAH",
+								"isPublished": false,
+								"createdAt": "2022-10-20 00:30:50"
+							}
+						],
+						"page": 1,
+						"size": 20,
+						"pages": 1,
+						"first": true,
+						"last": true,
+						"total": 1
+					}`), nil
+				}
+				donates := []v1.ResponseDonatesContent{}
+				err := client.EachDonate(ctx, func(donate *v1.ResponseDonatesContent) error {
+					donates = append(donates, *donate)
+					return nil
+				})
+				Expect(err).To(Succeed())
+				Expect(len(donates)).To(Equal(2))
+				Expect(donates[0].PubID).To(Equal("A1B-A123451"))
+				Expect(donates[1].PubID).To(Equal("A1B-A123452"))
+			})
+		})
 	})
 })
 
