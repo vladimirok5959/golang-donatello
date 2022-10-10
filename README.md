@@ -5,6 +5,8 @@ Go API client for ukrainian donate platform donatello.to
 
 ## Demo and testing
 
+Example is here: [https://github.com/vladimirok5959/golang-donatello/blob/main/main.go](https://github.com/vladimirok5959/golang-donatello/blob/main/main.go)
+
 ```sh
 export TOKEN="YOUR-TOKEN"
 go run main.go
