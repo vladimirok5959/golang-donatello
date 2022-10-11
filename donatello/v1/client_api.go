@@ -39,7 +39,7 @@ func (c *ClientAPI) request(ctx context.Context, url string) (int64, []byte, err
 	var resp *http.Response
 	resp, err = rcl.Do(req)
 	if err != nil {
-		return int64(resp.StatusCode), result, err
+		return 0, result, err
 	}
 	defer resp.Body.Close()
 
