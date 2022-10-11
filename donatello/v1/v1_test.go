@@ -3,6 +3,7 @@ package v1_test
 import (
 	"net/http"
 	"testing"
+	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -90,6 +91,7 @@ var _ = Describe("Client", func() {
 					TotalCount:  1,
 				}))
 				Expect(resp.CreatedAt).To(Equal("2022-10-20 00:30:50"))
+				Expect(resp.CreatedAtTime()).To(Equal(time.Date(2022, time.October, 20, 0, 30, 50, 0, time.UTC)))
 			})
 		})
 
@@ -122,6 +124,8 @@ var _ = Describe("Client", func() {
 					},
 				}))
 				Expect(resp.Content[0].AmountInt64()).To(Equal(int64(100)))
+				Expect(resp.Content[0].CreatedAt).To(Equal("2022-10-20 00:30:50"))
+				Expect(resp.Content[0].CreatedAtTime()).To(Equal(time.Date(2022, time.October, 20, 0, 30, 50, 0, time.UTC)))
 				Expect(resp.Page).To(Equal(int64(1)))
 				Expect(resp.Size).To(Equal(int64(20)))
 				Expect(resp.Pages).To(Equal(int64(1)))

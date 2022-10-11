@@ -2,6 +2,7 @@ package v1
 
 import (
 	"strconv"
+	"time"
 )
 
 type ResponseMeDonates struct {
@@ -20,6 +21,14 @@ type ResponseMe struct {
 	IsPublic  bool              `json:"isPublic"`
 	Donates   ResponseMeDonates `json:"donates"`
 	CreatedAt string            `json:"createdAt"`
+}
+
+func (r ResponseMe) CreatedAtTime() time.Time {
+	result, err := time.Parse("2006-01-02 15:04:05", r.CreatedAt)
+	if err != nil {
+		return time.Time{}
+	}
+	return result
 }
 
 // -----------------------------------------------------------------------------
@@ -43,6 +52,14 @@ func (r ResponseDonatesContent) AmountInt64() int64 {
 		result = 0
 	}
 
+	return result
+}
+
+func (r ResponseDonatesContent) CreatedAtTime() time.Time {
+	result, err := time.Parse("2006-01-02 15:04:05", r.CreatedAt)
+	if err != nil {
+		return time.Time{}
+	}
 	return result
 }
 
